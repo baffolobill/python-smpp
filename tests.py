@@ -325,6 +325,46 @@ class PduTestCase(unittest.TestCase):
         self.assertRaises(
             ValueError, encode_param_type, 'ABC', 'xstring', max=2)
 
+    def test_ignore_invalid_null_after_short_message_field(self):
+        """
+        At least one provider sends us an invalid deliver_sm PDU with a null
+        byte after the short_message field.
+        """
+        deliver_sm = {
+            'header': {
+                'command_length': 0,
+                'command_id': 'deliver_sm',
+                'command_status': 'ESME_ROK',
+                'sequence_number': 0,
+            },
+            'body': {
+                'mandatory_parameters': {
+                    'service_type': '',
+                    'source_addr_ton': 1,
+                    'source_addr_npi': 1,
+                    'source_addr': '',
+                    'dest_addr_ton': 1,
+                    'dest_addr_npi': 1,
+                    'destination_addr': '',
+                    'esm_class': 0,
+                    'protocol_id': 0,
+                    'priority_flag': 0,
+                    'schedule_delivery_time': '',
+                    'validity_period': '',
+                    'registered_delivery': 0,
+                    'replace_if_present_flag': 0,
+                    'data_coding': 0,
+                    'sm_default_msg_id': 0,
+                    'sm_length': 1,
+                    'short_message': 'test',
+                },
+            },
+        }
+        packed_pdu = pack_pdu(deliver_sm)
+        unpacked_pdu = unpack_pdu(packed_pdu)
+        unpacked_dodgy_pdu = unpack_pdu(packed_pdu + '\x00')
+        self.assertEqual(unpacked_pdu, unpacked_dodgy_pdu)
+
 
 class PduBuilderTestCase(unittest.TestCase):
     def test_submit_sm_message_too_long(self):

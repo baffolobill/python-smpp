@@ -891,6 +891,11 @@ def decode_optional_parameters(hex_ref):
     optional_parameters = []
     hex = hex_ref[0]
     while len(hex) > 0:
+        if len(hex) < 8:
+            # We don't have enough data here for this to be a valid param.
+            # TODO: Something better than `print` here.
+            print "Invalid optional param data, ignoring: %s" % (hex,)
+            break
         (tag_hex, length_hex, rest) = (hex[0:4], hex[4:8], hex[8: ])
         tag = optional_parameter_tag_name_by_hex(tag_hex)
         if tag == None:
