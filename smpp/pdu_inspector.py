@@ -94,7 +94,7 @@ class MultipartMessage:
             return False
 
     def get_partial(self):
-        items = self.array.items()
+        items = sorted(self.array.items())
         message = ''.join([i[1]['part_message'] for i in items])
         to_msisdn = from_msisdn = ''
         if len(items):

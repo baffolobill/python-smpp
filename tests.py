@@ -150,6 +150,10 @@ class PduTestCase(unittest.TestCase):
 
 
     def test_pack_unpack_performance(self):
+        import platform
+        if platform.python_implementation() == "PyPy":
+            # Skip this test on pypy, because the JIT warmup time dominates.
+            return
         print ''
         """
         Pack & unpack 500 submit_sm PDUs in under 1 second
