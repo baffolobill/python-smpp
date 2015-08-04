@@ -3,7 +3,8 @@ from setuptools import setup, find_packages
 
 
 def listify(filename):
-    return filter(None, open(filename, 'r').readlines())
+    filepath = os.path.join(os.path.dirname(__file__), filename)
+    return filter(None, open(filepath, 'r').readlines())
 
 
 def read_file(filename):
