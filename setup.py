@@ -2,11 +2,6 @@ import os
 from setuptools import setup, find_packages
 
 
-def listify(filename):
-    filepath = os.path.join(os.path.dirname(__file__), filename)
-    return filter(None, open(filepath, 'r').readlines())
-
-
 def read_file(filename):
     filepath = os.path.join(os.path.dirname(__file__), filename)
     return open(filepath, 'r').read()
@@ -21,7 +16,8 @@ setup(
     author='Praekelt Foundation',
     author_email='dev@praekeltfoundation.org',
     packages=find_packages(),
-    install_requires=['setuptools'].extend(listify('requirements.pip')),
+    install_requires=[
+    ],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
