@@ -1,6 +1,7 @@
-exclude test/*
-exclude tests.py
-exclude *.egg-info/*
-include LICENCE
+# Source distribution files.
+include LICENSE
 include README.rst
-include requirements.pip
+include requirements.pip requirements-dev.pip
+include setup.py setup.cfg
+
+exclude test/*
