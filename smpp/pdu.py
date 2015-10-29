@@ -1038,9 +1038,9 @@ def encode_param_type(param, type, min=0, max=None, map=None):
     elif type == 'integer':
         hex = ('%0'+str(min*2)+'x') % int(param)
     elif type == 'string':
-        hex = binascii.b2a_hex(param) + '00'
+        hex = binascii.hexlify(param.encode()).decode() + '00'
     elif type == 'xstring':
-        hex = binascii.b2a_hex(param)
+        hex = binascii.hexlify(param.encode()).decode()
     elif type == 'bitmask':
         hex = param
     elif type == 'hex':
