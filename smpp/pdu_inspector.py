@@ -1,5 +1,5 @@
 
-from pdu import *
+from .pdu import *
 
 
 def detect_multipart(pdu):

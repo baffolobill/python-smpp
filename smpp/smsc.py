@@ -1,7 +1,7 @@
 import logging
 import socket
 
-from esme import *
+from .esme import *
 
 
 logger = logging.getLogger(__name__)

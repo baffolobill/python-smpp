@@ -2,7 +2,7 @@ import logging
 import socket
 import sys
 
-from pdu_builder import *
+from .pdu_builder import *
 
 
 logger = logging.getLogger(__name__)
